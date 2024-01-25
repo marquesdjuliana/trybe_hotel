@@ -28,7 +28,8 @@ namespace TrybeHotel.Repository
 
             var cityDto = new CityDto {
                 CityId = city.CityId,
-                Name = city.Name
+                Name = city.Name,
+                 State = city.State
             };
 
             return cityDto;
