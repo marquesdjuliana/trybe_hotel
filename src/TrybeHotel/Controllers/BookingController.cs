@@ -21,18 +21,49 @@ namespace TrybeHotel.Controllers
         }
 
         [HttpPost]
+        [Authorize("Client")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        [Authorize(Policy = "Client")]
         public IActionResult Add([FromBody] BookingDtoInsert bookingInsert){
-            throw new NotImplementedException();
+            try
+            {
+                var token = HttpContext.User.Identity as ClaimsIdentity;
+                var email = token?.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
+
+                var booking = _repository.Add(bookingInsert, email);
+
+                return Created("", booking);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { message = e.Message });
+            }
         }
 
 
         [HttpGet("{Bookingid}")]
+        [Authorize("Client")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        [Authorize(Policy = "Client")]
-        public IActionResult GetBooking(int Bookingid){
-            throw new NotImplementedException();
+        public IActionResult GetBooking(int Bookingid)
+        {
+           
+           try
+            {
+                var token = HttpContext.User.Identity as ClaimsIdentity;
+                var email = token?.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
+
+                var booking = _repository.GetBooking(Bookingid, email);
+
+                if (booking == null)
+                {
+                    return Unauthorized(new { message = "Unauthorized access" });
+                }
+
+                return Ok(booking);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { message = e.Message });
+            }
         }
     }
 }

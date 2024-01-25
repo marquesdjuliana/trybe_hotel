@@ -19,14 +19,31 @@ namespace TrybeHotel.Controllers
         }
         
         [HttpGet]
+        [Authorize("Admin")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult GetUsers(){
-            throw new NotImplementedException();
+            try
+            {
+                var users = _repository.GetUsers();
+                return Ok(users);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { message = e.Message });
+            }
         }
 
         [HttpPost]
         public IActionResult Add([FromBody] UserDtoInsert user)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return Created("", _repository.Add(user));
+            }
+            catch (Exception e)
+            {
+                return Conflict(new { message = e.Message });
+            }
         }
     }
 }

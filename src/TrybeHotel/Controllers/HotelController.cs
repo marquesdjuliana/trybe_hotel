@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Mvc;
 using TrybeHotel.Models;
 using TrybeHotel.Repository;
 using TrybeHotel.Dto;
-using TrybeHotel.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
@@ -13,7 +12,7 @@ namespace TrybeHotel.Controllers
     public class HotelController : Controller
     {
         private readonly IHotelRepository _repository;
-  
+
         public HotelController(IHotelRepository repository)
         {
             _repository = repository;
@@ -21,15 +20,32 @@ namespace TrybeHotel.Controllers
         
         [HttpGet]
         public IActionResult GetHotels(){
-            throw new NotImplementedException();
+            try
+            {
+                var hotels = _repository.GetHotels();
+                return Ok(hotels);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erro interno: {ex.Message}");
+            }
         }
 
         [HttpPost]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [Authorize(Policy = "Admin")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult PostHotel([FromBody] Hotel hotel){
-            throw new NotImplementedException();
+            try
+            {
+                var addedHotelDto = _repository.AddHotel(hotel);
+                return CreatedAtAction(nameof(PostHotel), addedHotelDto);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = "Erro ao adicionar hotel", error = ex.Message });
+            }
         }
+
 
     }
 }
