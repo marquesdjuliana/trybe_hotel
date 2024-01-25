@@ -70,7 +70,8 @@ namespace TrybeHotel.Repository
                         Name = roomDto.Hotel.Name,
                         Address = roomDto.Hotel.Address,
                         CityId = roomDto.Hotel.CityId,
-                        CityName = roomDto.Hotel.City.Name
+                        CityName = roomDto.Hotel.City.Name,
+                        State = roomDto.Hotel.City.State,
                     }
                 };
             }
