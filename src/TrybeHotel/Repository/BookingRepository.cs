@@ -97,16 +97,17 @@ namespace TrybeHotel.Repository
                     Image = booking.Room.Image,
                     Hotel = new HotelDto
                     {
-                        HotelId = booking.Room.HotelId,
+                        HotelId = booking.Room.Hotel.HotelId,
                         Name = booking.Room.Hotel.Name,
                         Address = booking.Room.Hotel.Address,
                         CityId = booking.Room.Hotel.CityId,
-                        CityName = booking.Room.Hotel.City.Name
+                        CityName = booking.Room.Hotel.City.Name,
+                        State = booking.Room.Hotel.City.State
                     }
                 }
             };
-        }
 
     }
 
+}
 }

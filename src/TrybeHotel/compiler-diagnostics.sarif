@@ -561,10 +561,10 @@
               "resultFile": {
                 "uri": "file:///home/juliana/csharp-030-csharp-projeto-trybe-hotel-fase-c/src/TrybeHotel/Repository/BookingRepository.cs",
                 "region": {
-                  "startLine": 101,
-                  "startColumn": 32,
-                  "endLine": 101,
-                  "endColumn": 50
+                  "startLine": 100,
+                  "startColumn": 35,
+                  "endLine": 100,
+                  "endColumn": 53
                 }
               }
             }
