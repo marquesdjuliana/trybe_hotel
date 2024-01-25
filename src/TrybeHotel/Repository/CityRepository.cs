@@ -21,7 +21,6 @@ namespace TrybeHotel.Repository
             return cities;
         }
 
-        // 2. Refatore o endpoint POST /city
         public CityDto AddCity(City city)
         {
             _context.Cities.Add(city);
@@ -35,7 +34,6 @@ namespace TrybeHotel.Repository
             return cityDto;
         }
 
-        // 3. Desenvolva o endpoint PUT /city
         public CityDto UpdateCity(City city)
         {
            throw new NotImplementedException();

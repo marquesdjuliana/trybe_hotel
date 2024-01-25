@@ -12,6 +12,9 @@ namespace TrybeHotel.Models
         [Required]
         public string? Name { get; set; }
 
+        [Required]
+        public string? State { get; set; }
+
         public ICollection<Hotel>? Hotels { get; set; }
     }
 }
