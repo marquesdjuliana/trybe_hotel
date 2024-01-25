@@ -50,7 +50,8 @@ namespace TrybeHotel.Repository
                         Name = h.Name,
                         Address = h.Address,
                         CityId = h.CityId,
-                        CityName = h.City.Name
+                        CityName = h.City.Name,
+                        State = h.City.State,
                     })
                     .FirstOrDefault();
 
